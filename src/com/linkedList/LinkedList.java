@@ -14,8 +14,21 @@ public class LinkedList{
         length++;
     }
 
-    public void printList(ListNode headNode){
-        ListNode currNode = headNode;
+    public void insertAtEnd(ListNode node){
+        if(head == null)
+            head = node;
+        else{
+            ListNode currNode = head;
+            while(currNode.getNext()!= null) {
+            	currNode = currNode.getNext();
+            }
+            currNode.setNext(node);
+        }
+        length++;
+    }
+
+    public void printList(){
+        ListNode currNode = head;
         while(currNode!=null){
             System.out.print(currNode.getData()+" -->");
             currNode = currNode.getNext();
@@ -29,10 +42,11 @@ public class LinkedList{
         ListNode ln2 = new ListNode (20);
         ListNode ln3 = new ListNode (30);
         LinkedList ll = new LinkedList();
-        ll.insertAtBegin(ln1);
-        ll.insertAtBegin(ln2);
-        ll.insertAtBegin(ln3);
-        ll.printList(ln3);
+        ll.insertAtEnd(ln1);
+        ll.insertAtEnd(ln2);
+        ll.insertAtEnd(ln3);
+        ll.insertAtBegin(new ListNode(100));
+        ll.printList();
         System.out.println(ll.getHead().getData());
     }
  }
