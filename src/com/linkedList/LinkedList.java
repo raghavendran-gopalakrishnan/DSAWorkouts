@@ -2,6 +2,9 @@ package com.linkedList;
 
 public class LinkedList{
     ListNode head;
+    public LinkedList(){
+        length = 0;
+    }
     private int length = 0;
     
     public ListNode getHead(){
@@ -26,6 +29,70 @@ public class LinkedList{
         }
         length++;
     }
+    
+    public void insertAtPosition(int position, int data) {
+    	if(head == null)
+    		head = new ListNode(data);
+    	else if(position == 0) {
+    		ListNode node = new ListNode(data);
+    		node.setNext(head);
+    		head = node;
+    		length++;
+    	} else {
+    		ListNode currNode = head;
+    		for(int i=1;i<position;i++) {
+    			currNode = currNode.getNext();
+    		}
+    		ListNode newNode = new ListNode(data);
+    		newNode.setNext(currNode.getNext());
+    		currNode.setNext(newNode);
+    	}
+    }
+
+    public ListNode removeAtBegin(){
+        ListNode node = head;
+        if(node!=null){
+            head = node.getNext();
+            node.setNext(null);
+        }
+        System.out.println("Removed "+node.getData());
+        return node;
+    }
+
+    public ListNode removeAtEnd(){
+        //if the list is empty
+        if(head == null)
+            return null;
+        else{
+            ListNode prev = head, temp = null, next = head.getNext();
+            //if there is only 1 node in the list
+            if(next == null){
+                head = null;
+                return prev;
+            }
+            //loop till the last node and store previous node for each nodes
+            while((next = prev.getNext()) != null){
+                temp = prev;
+                prev = next;
+            }
+            //set N-1's nextNode as null
+            temp.setNext(null);
+            return prev;
+        }
+    }
+
+    public void removeNode(ListNode node){
+        if(head == null)
+            return;
+        if(node.equals(head)){
+            head = null;
+            return;
+        }
+        ListNode p = head, q = null;
+        while((q = p.getNext())!=null){
+            
+        }
+    }
 
     public void printList(){
         ListNode currNode = head;
@@ -47,6 +114,10 @@ public class LinkedList{
         ll.insertAtEnd(ln3);
         ll.insertAtBegin(new ListNode(100));
         ll.printList();
-        System.out.println(ll.getHead().getData());
+        ll.removeAtBegin();
+        ll.printList();
+        ll.removeAtEnd();
+        ll.printList();
+        
     }
  }
