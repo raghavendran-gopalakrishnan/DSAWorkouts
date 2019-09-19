@@ -31,6 +31,10 @@ public class LinkedList{
     }
     
     public void insertAtPosition(int position, int data) {
+        if(position > length)
+            position  = length;
+        if(position < 0)
+            position = 0;
     	if(head == null)
     		head = new ListNode(data);
     	else if(position == 0) {
@@ -46,7 +50,8 @@ public class LinkedList{
     		ListNode newNode = new ListNode(data);
     		newNode.setNext(currNode.getNext());
     		currNode.setNext(newNode);
-    	}
+        }
+        length++;
     }
 
     public ListNode removeAtBegin(){
@@ -55,6 +60,7 @@ public class LinkedList{
             head = node.getNext();
             node.setNext(null);
         }
+        length--;
         System.out.println("Removed "+node.getData());
         return node;
     }
@@ -77,6 +83,7 @@ public class LinkedList{
             }
             //set N-1's nextNode as null
             temp.setNext(null);
+            length--;
             return prev;
         }
     }
@@ -90,8 +97,45 @@ public class LinkedList{
         }
         ListNode p = head, q = null;
         while((q = p.getNext())!=null){
-            
+            if(q.equals(node)){
+                p.setNext(q.getNext());
+                length--;
+                return;
+            }
+            p = q;
         }
+    }
+
+    public void removeAtPosition(int position){
+        if(position > length)
+            position  = length;
+        if(position < 0)
+            position = 0;
+        if(head == null)
+            return;
+        
+        if(position == 0)
+            head = head.getNext();
+        else{
+            ListNode currNode = head;
+    		for(int i=1;i<position;i++) {
+    			currNode = currNode.getNext();
+            }
+            currNode.setNext(currNode.getNext().getNext());
+        }
+        length--;
+    }
+
+    public int getPosition(int data){
+        int pos = 0;
+        ListNode node = head;
+        while(node != null){
+            if(node.getData() == data)
+                return pos;
+            pos++;
+            node = node.getNext();
+        }
+        return Integer.MIN_VALUE;
     }
 
     public void printList(){
@@ -117,6 +161,12 @@ public class LinkedList{
         ll.removeAtBegin();
         ll.printList();
         ll.removeAtEnd();
+        ll.insertAtEnd(new ListNode(97));
+        ll.insertAtEnd(new ListNode(98));
+        ll.insertAtEnd(new ListNode(99));
+        ll.printList();
+        ll.removeAtPosition(3);
+        System.out.println(ll.getPosition(20));
         ll.printList();
         
     }
