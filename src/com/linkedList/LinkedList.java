@@ -148,6 +148,11 @@ public class LinkedList{
         System.out.println();
     }
 
+    public void clearList(){
+        head = null;
+        length = 0;
+    }
+
     public static void main (String args[]){
         ListNode ln1 = new ListNode (10);
         ListNode ln2 = new ListNode (20);
@@ -167,6 +172,7 @@ public class LinkedList{
         ll.printList();
         ll.removeAtPosition(3);
         System.out.println(ll.getPosition(20));
+        ll.removeNode(ln2);
         ll.printList();
         
     }
