@@ -14,6 +14,8 @@ public class DLLDemo {
 		 * dll.printList(); System.out.print("After deleting 5 "); dll.deleteByValue(5);
 		 * dll.printList();
 		 */
+        dll.insertAtEnd(17);
+        dll.printList();
         dll.insertAfter(15, 8);
         dll.printList();
         dll.insertAfter(11, 2);
